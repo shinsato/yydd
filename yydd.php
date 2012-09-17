@@ -6,7 +6,7 @@
 	require_once('classes/Fighter.php');
 	require_once('classes/Battle.php');
 	
-	if (isset($argv[1]))
+	if(isset($argv[1]))
 	{
 		$seed = intval($argv[1]);
 	} else {

@@ -5,33 +5,20 @@
 		var $contestantList = array();
 		var $contestants = array();
 
-		public function __construct($contestants)
-		{
-			$this->contestantList = $contestants;
-			$this->setContestants();
-		}
-
-		public function getContestantList()
-		{
-			return $this->contestantList;
-		}
-
-		private function setContestants()
+		public function __construct()
 		{
 			$this->contestants = array();
-
-			foreach($this->getContestantList() as $contestant)
-			{
-				$player = new $contestant;
-				$this->contestants[] = $player;
-
-				echo $player->getName() . " Entered the Arena! " . $player->health . "\n";
-			}
-			echo "\n";
 		}
 
 		public function start()
 		{
+			if(is_array($this->contestants))
+			{
+				foreach($this->contestants as $contestant)
+				{
+					echo $contestant->getName() . " Entered the Arena! " . $contestant->health . "\n";
+				}
+			}
 			while(count($this->contestants) > 1)
 			{
 				echo count($this->contestants) . " contestants remaining.\n";

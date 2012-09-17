@@ -2,45 +2,30 @@
 <?php
 	$dataCSV = fopen('battles/presidents/data.csv', 'r');
 	$headers = fgetcsv($dataCSV);
-
-	foreach($headers as $key => $header)
-	{
-		$$header = $key;
-	}
-
-	$contestants = "<?php\n";
+	
+	$flip_headers = array_flip($headers);
+	
+	$contestants = array();
+	$contestants[] = "<?php\n";
 	while($data = fgetcsv($dataCSV))
 	{
-		$contestants .= "
-	\$contestants[] = '$data[$phpClassName]';
-	class $data[$phpClassName] extends Fighter
-	{
-		var \$playerName = '$data[$playerName]';
-		var \$party = '$data[$party]';
-
-		var \$level = $data[$level];
-
-		var \$strength = $data[$strength];
-		var \$dexterity = $data[$dexterity];
-		var \$wisdom = $data[$wisdom];
-		var \$charisma = $data[$charisma];
-		var \$intelligence = $data[$intelligence];
-		var \$constitution = $data[$constitution];
-
-		var \$thac0 = $data[$thac0];
-		var \$ac = $data[$ac];
-";
-		if ($data[$warcries] != '')
+		$class_name = $data[$flip_headers['phpClassName']];
+		
+		$contestants[] = '$'."{$class_name} = new Fighter();";
+		foreach($headers as $key => $header)
 		{
-			$contestants .= "
-		var \$warcries = array($data[$warcries]);
-			";
+			if($header == 'phpClassName')
+				continue;
+				
+			if($header == 'warcries')
+				$contestants[] = '$'."{$class_name}->{$header} = array({$data[$key]});";
+			else
+				$contestants[] = '$'."{$class_name}->{$header} = '{$data[$key]}';";
 		}
-		$contestants .= "
+		$contestants[] = '$battle->contestants[] = $'.$class_name.";\n\n";
 	}
-";
-	}
-	$contestants .= "?>";
+	$contestants[] = "?>";
 
-	echo $contestants;
+	echo implode("\n", $contestants);
+	file_put_contents('battles/presidents/Contestants.php', implode("\n",$contestants));
 ?>
