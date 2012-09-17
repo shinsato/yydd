@@ -111,10 +111,6 @@
 		{
 			if ($this->isAlive())
 			{
-				if($this->rollDice(1,20) >= 12)
-				{
-					$this->warCry();
-				}
 				$target = $this->findTarget($battle->contestants);
 				$this->attack($battle, $target);
 			}
@@ -138,6 +134,7 @@
 
 			if ($toHitRoll == 1)
 			{
+				$this->warCry();
 				//critical miss
 				echo $this->getName() . " tries to hit someone, not sure who. Because he whiffs so bad he trips...";
 				$damage = $this->rollDice(1, 4);
@@ -149,6 +146,7 @@
 				}
 				return;
 			} elseif ($toHitRoll >= $this->getCritChance()) {
+				$this->warCry();
 				//Critical hit!
 				echo $this->getName() . " SUPER MEGA stabs " . $battle->contestants[$target]->getName();
 				$damageMultiplyer = 2;

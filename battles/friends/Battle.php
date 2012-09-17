@@ -1,6 +1,6 @@
 <?php
 	$battle = new Battle();
-	$battle->name = 'Yankee Doodle Deathday Classic';
+	$battle->name = 'Facebook Deathday Alpha';
 
 	require_once('Contestants.php');
 ?>
