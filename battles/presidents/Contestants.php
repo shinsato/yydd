@@ -149,7 +149,7 @@ $Harrison->wisdom = '10';
 $Harrison->intelligence = '10';
 $Harrison->strength = '10';
 $Harrison->constitution = '10';
-$Harrison->warcries = array();
+$Harrison->warcries = array("I died in 30 days!");
 $battle->contestants[] = $Harrison;
 
 
@@ -540,7 +540,7 @@ $Truman->wisdom = '10';
 $Truman->intelligence = '10';
 $Truman->strength = '10';
 $Truman->constitution = '10';
-$Truman->warcries = array();
+$Truman->warcries = array("Give 'em HELL!");
 $battle->contestants[] = $Truman;
 
 
@@ -693,7 +693,7 @@ $Clinton->wisdom = '10';
 $Clinton->intelligence = '10';
 $Clinton->strength = '10';
 $Clinton->constitution = '10';
-$Clinton->warcries = array("Super Sax Solo Attack!");
+$Clinton->warcries = array("SUPER SAX SOLO ATTACK!");
 $battle->contestants[] = $Clinton;
 
 
@@ -727,7 +727,7 @@ $Obama->wisdom = '10';
 $Obama->intelligence = '10';
 $Obama->strength = '10';
 $Obama->constitution = '10';
-$Obama->warcries = array("How about some Obamacare","Obamacare covers stabbings.");
+$Obama->warcries = array("How about some Obamacare","Obamacare covers stabbings.","YES I CAN!!");
 $battle->contestants[] = $Obama;
 
 

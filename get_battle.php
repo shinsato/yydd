@@ -1,14 +1,16 @@
 #!/usr/bin/php -q
 <?php
-	$dataCSV = fopen('battles/presidents/data.csv', 'r');
-	$headers = fgetcsv($dataCSV);
+	$csv_data = explode("\n",file_get_contents('https://docs.google.com/spreadsheet/pub?key=0AoepryCO01AzdDhKOVd1dzhQZGtXVGk5N1pwb1dtbkE&single=true&gid=0&output=csv'));
+	$headers = str_getcsv($csv_data[0]);
+	unset($csv_data[0]);
 	
 	$flip_headers = array_flip($headers);
 	
 	$contestants = array();
 	$contestants[] = "<?php\n";
-	while($data = fgetcsv($dataCSV))
+	foreach($csv_data as $raw_data)
 	{
+		$data = str_getcsv($raw_data);
 		$class_name = $data[$flip_headers['phpClassName']];
 		
 		$contestants[] = '$'."{$class_name} = new Fighter();";
